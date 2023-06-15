@@ -35,7 +35,7 @@ function loadPage(elem){
         case 'homebtn':
             loadHome();
             setActiveButton(elem);
-            set
+            // set
             break;
         case 'menubtn':
             loadMenu();
