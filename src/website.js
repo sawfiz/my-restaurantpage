@@ -33,15 +33,18 @@ navBar.setAttribute('id', 'header')
 function loadPage(elem){
     switch(elem.id){
         case 'homebtn':
+            console.log("home")
             loadHome();
             setActiveButton(elem);
             // set
             break;
         case 'menubtn':
+            console.log("menu")
             loadMenu();
             setActiveButton(elem);
             break;
         case 'staffbtn':
+            console.log('staff')
             loadStaff();
             setActiveButton(elem);
             break;
@@ -50,15 +53,15 @@ function loadPage(elem){
 }
 const buttons = document.querySelectorAll('button')
 function setActiveButton(button){
-    buttons.forEach(button=>{
-        if (button !== this){
-            button.classList.remove('activebtn')
+    buttons.forEach(btn=>{
+        if (btn!== button){
+            btn.classList.remove('activebtn')
         }
         button.classList.add('activebtn')
     })
 }
 buttons.forEach(button => button.addEventListener('click', (e)=>{
-    loadPage()
+    loadPage(e.target)
 }))
 
 return navBar
