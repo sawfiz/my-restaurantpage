@@ -31,6 +31,7 @@ navBar.setAttribute('id', 'header')
 
 
 function loadPage(elem){
+    console.log(elem, elem.id)
     switch(elem.id){
         case 'homebtn':
             console.log("home")
