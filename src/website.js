@@ -3,91 +3,90 @@ import loadMenu from './menu';
 import loadStaff from './staff';
 import './style.css';
 
+const content = document.createElement('div');
+content.setAttribute('id', 'content');
+document.body.appendChild(content);
 
-const content = document.createElement('div')
-content.setAttribute('id', 'content')
-document.body.appendChild(content)
+function createNav() {
+  const navBar = document.createElement('div');
+  const homebtn = document.createElement('button');
+  const menubtn = document.createElement('button');
+  const staffbtn = document.createElement('button');
 
-function createNav(){
+  homebtn.textContent = 'Home';
+  menubtn.textContent = 'Menu';
+  staffbtn.textContent = 'Staff';
 
-const navBar = document.createElement('div');
-const homebtn = document.createElement('button');
-const menubtn = document.createElement('button');
-const staffbtn = document.createElement('button');
+  homebtn.setAttribute('id', 'homebtn');
+  menubtn.setAttribute('id', 'menubtn');
+  staffbtn.setAttribute('id', 'staffbtn');
 
-homebtn.textContent = 'Home';
-menubtn.textContent = 'Menu';
-staffbtn.textContent = 'Staff';
+  navBar.appendChild(homebtn);
+  navBar.appendChild(menubtn);
+  navBar.appendChild(staffbtn);
 
-homebtn.setAttribute('id', 'homebtn');
-menubtn.setAttribute('id', 'menubtn');
-staffbtn.setAttribute('id', 'staffbtn');
+  navBar.setAttribute('id', 'header');
 
-navBar.appendChild(homebtn);
-navBar.appendChild(menubtn);
-navBar.appendChild(staffbtn);
+  function setActiveButton(button) {
+    buttons.forEach((btn) => {
+      if (btn !== button) {
+        btn.classList.remove('activebtn');
+      }
+      button.classList.add('activebtn');
+    });
+  }
 
-navBar.setAttribute('id', 'header')
-
-
-function loadPage(elem){
-    console.log(elem, elem.id)
-    switch(elem.id){
-        case 'homebtn':
-            console.log("home")
-            loadHome();
-            setActiveButton(elem);
-            // set
-            break;
-        case 'menubtn':
-            console.log("menu")
-            loadMenu();
-            setActiveButton(elem);
-            break;
-        case 'staffbtn':
-            console.log('staff')
-            loadStaff();
-            setActiveButton(elem);
-            break;
+  function loadPage(elem) {
+    console.log(elem, elem.id);
+    switch (elem.id) {
+      case 'homebtn':
+        console.log('home');
+        loadHome();
+        setActiveButton(elem);
+        // set
+        break;
+      case 'menubtn':
+        console.log('menu');
+        loadMenu();
+        setActiveButton(elem);
+        break;
+      case 'staffbtn':
+        console.log('staff');
+        loadStaff();
+        setActiveButton(elem);
+        break;
     }
+  }
 
-}
-const buttons = document.querySelectorAll('button')
-function setActiveButton(button){
-    buttons.forEach(btn=>{
-        if (btn!== button){
-            btn.classList.remove('activebtn')
-        }
-        button.classList.add('activebtn')
+  const buttons = navBar.querySelectorAll('button');
+  console.log(buttons);
+  buttons.forEach((button) =>
+    button.addEventListener('click', (e) => {
+      loadPage(e.target);
     })
-}
-buttons.forEach(button => button.addEventListener('click', (e)=>{
-    loadPage(e.target)
-}))
+  );
 
-return navBar
+  return navBar;
 }
 
+const createMain = () => {
+  const main = document.createElement('main');
+  main.setAttribute('id', 'main');
+  return main;
+};
 
+const createFooter = () => {
+  const footer = document.createElement('div');
+  footer.setAttribute('id', 'footer');
+  return footer;
+};
 
-const createMain = ()=>{
-    const main = document.createElement('main');
-    main.setAttribute('id', 'main');
-    return main;
+function combineSections() {
+  content.appendChild(createNav());
+  content.appendChild(createMain());
+  content.appendChild(createFooter());
+
+  loadHome();
 }
 
-const createFooter = ()=>{
-    const footer = document.createElement('div');
-    footer.setAttribute('id', 'footer');
-    return footer;
-}
-
-function combineSections(){
-    content.appendChild(createNav());
-    content.appendChild(createMain());
-    content.appendChild(createFooter());
-    
-    loadHome();
-}
-
-export {combineSections}
+export { combineSections };
